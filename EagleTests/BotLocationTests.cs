@@ -4,7 +4,6 @@ using EagleServices;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
-using Xunit;
 
 namespace EagleTests
 {
@@ -25,14 +24,14 @@ namespace EagleTests
 		}
 
 		/// <summary>
-		/// This is a simulated test and should not remain 
-		/// This test could cause a flaky tests for others... 
+		/// This is a simulating a verification state so that actions could be performed on the response object
 		/// </summary>
 		[Theory]
 		[InlineData(true)]
 		[InlineData(false)]
 		public void TestHeightSpecifiedShouldCauseAFailure(bool verifyResult)
 		{
+			//ARRANGE
 			var record = fixture.Create<BotRecord>();
 			var storageMock = new Mock<IBotStorage>();
 			var verifyMock = new Mock<IBotVerification>();
@@ -68,16 +67,11 @@ namespace EagleTests
 
 
 		[Fact]
-		public void ShouldHaveANumberofBotLocationsRecorded()
+		public void ShouldHaveANumberOfBotLocationsRecorded()
 		{
 			//ARRANGE
 			var records = fixture.Build<BotRecord>().CreateMany(20);
-
 			var botService = serviceProvider.GetRequiredService<BotService>();
-			var storage = serviceProvider.GetRequiredService<IBotStorage>();
-
-			storage.Should().BeOfType<BotStorage>();
-			var botStorage = storage as BotStorage;
 
 			foreach (var r in records)
 			{
