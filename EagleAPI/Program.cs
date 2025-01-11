@@ -1,3 +1,6 @@
+using EagleServices;
+using Microsoft.Extensions.Caching.Memory;
+
 namespace EagleAPI
 {
 	public class Program
@@ -12,6 +15,11 @@ namespace EagleAPI
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
+			builder.Services.AddMemoryCache();
+
+			builder.Services.AddSingleton<IBotStorage, BotStorage>();
+			builder.Services.AddSingleton<IBotVerification, BotVerification>();
+			builder.Services.AddSingleton<BotService>();
 
 			var app = builder.Build();
 
@@ -20,7 +28,8 @@ namespace EagleAPI
 			{
 				app.UseSwagger();
 				app.UseSwaggerUI();
-			}
+			};
+
 
 			app.UseHttpsRedirection();
 
