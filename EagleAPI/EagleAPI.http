@@ -1,6 +1,25 @@
-@EagleAPI_HostAddress = http://localhost:5224
+@baseUrl = http://localhost:5224
 
-GET {{EagleAPI_HostAddress}}/weatherforecast/
+GET {{baseUrl}}/location/
 Accept: application/json
 
 ###
+
+###
+POST {{baseUrl}}/location/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "identifier": "31a85f64-5717-4562-b3fc-2c963f66afa6",
+  "timestamp": "2025-01-09T05:15:20.492Z",
+  "roadName": "string",
+  "flowDirection": 0,
+  "flowRate": 0,
+  "vehicleSpeedAverage": 0,
+  "location": {
+    "latitude": 0,
+    "longitude": 0,
+    "altitude": 0
+  }
+}
